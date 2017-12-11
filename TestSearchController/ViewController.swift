@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
@@ -23,6 +25,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         navigationController?.barHideOnTapGestureRecognizer.addTarget(self, action: #selector(barHideAction(_:)))
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.hidesBarsOnTap = true
         
         // For debug
@@ -44,6 +47,18 @@ class ViewController: UIViewController {
         if let nc = navigationController {
             let isHidden = nc.isNavigationBarHidden
             searchController.searchBar.isHidden = isHidden
+            
+            for constraint in searchController.searchBar.constraints {
+                if constraint.firstAttribute == NSLayoutAttribute.height {
+                    if self.view.safeAreaInsets.top - UIApplication.shared.statusBarFrame.size.height == constraint.constant {
+                        // detected SafeAreaLayoutGuide bug, apply a workaround to fix
+                        topConstraint.constant = -constraint.constant
+                    } else {
+                        topConstraint.constant = 0
+                    }
+                }
+            }
+
 //            nc.setNavigationBarHidden(!isHidden, animated: true)
         }
     }
