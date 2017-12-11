@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Demo"
         
 //        definesPresentationContext = true
 //        extendedLayoutIncludesOpaqueBars = true
@@ -44,6 +43,12 @@ class ViewController: UIViewController {
         if let nc = navigationController {
             let isHidden = nc.isNavigationBarHidden
             searchController.searchBar.isHidden = isHidden
+//            if isHidden {
+//                self.additionalSafeAreaInsets.top = -(self.navigationController?.navigationBar.frame.size.height)!
+//            }
+//            else {
+//                self.additionalSafeAreaInsets.top = 0
+//            }
 //            nc.setNavigationBarHidden(!isHidden, animated: true)
         }
     }
