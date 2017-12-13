@@ -46,12 +46,12 @@ class ViewController: UIViewController {
 //            self.updateFrame()
         }
         
-        if let nc = navigationController, nc.isNavigationBarHidden &&
-            !searchController.isActive {
-            if size.width > size.height {
-                searchController.searchBar.isHidden =  size.width > size.height
-            }
-        }
+//        if let nc = navigationController, nc.isNavigationBarHidden &&
+//            !searchController.isActive {
+//            if size.width > size.height {
+//                searchController.searchBar.isHidden =  size.width > size.height
+//            }
+//        }
     }
     
     
@@ -62,8 +62,9 @@ class ViewController: UIViewController {
     func updateFrame() {
         if let nc = navigationController {
             let isHidden = nc.isNavigationBarHidden
-            searchController.searchBar.isHidden = isHidden
-            
+//            searchController.searchBar.isHidden = isHidden
+            searchController.searchBar.superview?.isHidden = isHidden
+
 //            if searchController.isActive {
 //                if isHidden {
 //                    self.additionalSafeAreaInsets.top = -nc.navigationBar.frame.size.height -
